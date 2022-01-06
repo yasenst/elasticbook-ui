@@ -1,0 +1,73 @@
+<div id="wrapper">
+
+    <div *ngIf="book" id="main">
+
+        <div class="inner">
+            <h1>{{book.title}} - {{book.author}}</h1>
+            <div class="col-sm-3">
+                <button mat-button (click)="back()" class="back-button">Back</button>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <img src="../../../assets/blog-4-720x480.jpg" class="img-fluid" alt="">
+                    </div>
+
+                    <div class="col-md-7">
+                        <h2>{{book.description}}</h2>
+
+                        <div *ngIf="isUserLoggedIn()" matTooltip="You already own this book" [matTooltipDisabled]="!userOwnsThisBook" class="col-sm-6">
+                            <button mat-button [disabled]="userOwnsThisBook" (click)="addBookToUser()">Add to 'My Books'</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="container-fluid">
+                <h2 class="h2 border-bottom">More like this</h2>
+
+                <section class="tiles">
+                    <article *ngFor="let bookLikeThis of booksLikeThis" class="style3">
+										<span class="image">
+											<img src="../../../assets/blog-4-720x480.jpg" alt="" />
+										</span>
+                        <a >
+                            <h2>{{bookLikeThis.title}}</h2>
+
+                            <h4>{{bookLikeThis.author}}</h4>
+                            [routerLink]="['/book', bookLikeThis.id]"                       </a>
+                    </article>
+                </section>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="container-fluid">
+                <h2 class="h2 border-bottom">More from '{{book.subject}}'</h2>
+
+                <section class="tiles">
+                    <article *ngFor="let bookFromSameSubject of booksFromSameSubject" class="style2">
+										<span class="image">
+											<img src="../../../assets/blog-4-720x480.jpg" alt="" />
+										</span>
+                        <a [routerLink]="['/book', bookFromSameSubject.id]">
+                            <h2>{{bookFromSameSubject.title}}</h2>
+
+                            <h4>{{bookFromSameSubject.author}}</h4>
+
+                        </a>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+

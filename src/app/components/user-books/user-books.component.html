@@ -1,0 +1,38 @@
+<div id="wrapper">
+    <div id="main">
+        <div class="inner">
+            <h1>{{getLoggedUsername()}}'s books</h1>
+            <div class="example-container mat-elevation-z8">
+
+                <mat-table [dataSource]="dataSource" matSort>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="author">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Author </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.author}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="subject">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Subject </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.subject}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row (dblclick)="openBookDetails(row.id)" *matRowDef="let row; columns: displayedColumns;">
+                    </mat-row>
+                </mat-table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
+
+

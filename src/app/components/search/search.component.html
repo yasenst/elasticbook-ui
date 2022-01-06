@@ -1,0 +1,90 @@
+
+<div id="wrapper">
+
+    <!-- Header -->
+    <!--<header id="header">
+        <div class="inner">
+
+            &lt;!&ndash; Logo &ndash;&gt;
+            <a [routerLink]="['']" class="logo">
+                <span class="fa fa-book"></span> <span class="title">Learning Materials</span>
+            </a>
+
+            &lt;!&ndash; Nav &ndash;&gt;
+            <nav>
+                <ul>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['']">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/search']">Search</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>-->
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+            <h1>Library</h1>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                        <table>
+                            <tr>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Keyword</mat-label>
+                                    <input matInput  formControlName="keyword">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Subject</mat-label>
+                                    <mat-select (selectionChange)="changeSubject($event)">
+                                        <mat-option></mat-option>
+                                        <mat-option value="Computer Science">Computer Science</mat-option>
+                                        <mat-option value="Algorithms">Algorithms</mat-option>
+                                        <mat-option value="Databases">Databases</mat-option>
+                                        <mat-option value="Data Science">Data Science</mat-option>
+                                        <mat-option value="Programming">Programming</mat-option>
+                                        <mat-option value="Signal Processing">Signal Processing</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <td><button class="btn btn-primary" type="submit">Search</button></td>
+                            </tr>
+
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="container-fluid">
+                <h2 class="h2 border-bottom">Search Results</h2>
+
+                <section class="tiles">
+                    <article *ngFor="let book of searchResults" class="style1">
+										<span class="image">
+											<img src="../../../assets/blog-4-720x480.jpg" alt="" />
+										</span>
+                        <a [routerLink]="['/book', book.id]">
+                            <h2>{{book.title}}</h2>
+
+                            <h4>{{book.author}}</h4>
+
+                            <p>Subject: {{book.subject}}</p>
+                        </a>
+                    </article>
+                </section>
+            </div>
+
+        </div>
+    </div>
+
+</div>

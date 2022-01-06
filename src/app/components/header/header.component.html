@@ -1,0 +1,14 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span><a mat-button [routerLink]="['']" style="font-size: larger;">Learning Materials</a></span>
+        <span class="example-fill-remaining-space"></span>
+        <span class="align-center"></span>
+        <span class="example-spacer"></span>
+        <a mat-button [routerLink]="['']">Home</a>
+        <a mat-button [routerLink]="['/search']" >Search</a>
+        <a mat-button *ngIf="!isUserLoggedIn()" routerLink="/login">Login</a>
+        <a mat-button *ngIf="isUserLoggedIn()" routerLink="/user-books">My Books</a>
+        <span class="fill-space"></span>
+        <a mat-button *ngIf="isUserLoggedIn()" routerLink="/logout">Logout</a>
+    </mat-toolbar-row>
+</mat-toolbar>
