@@ -7,6 +7,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {LogoutComponent} from "./components/logout/logout.component";
 import {AuthGuardService} from "./service/auth-guard.service";
 import {UserBooksComponent} from "./components/user-books/user-books.component";
+import {CourseDetailsComponent} from "./components/course-details/course-details.component";
 
 const routes: Routes = [
     {
@@ -16,6 +17,10 @@ const routes: Routes = [
     {
         path: 'book/:bookId',
         component: BookDetailsComponent
+    },
+    {
+        path: 'course/:courseId',
+        component: CourseDetailsComponent
     },
     {
         path: 'search',

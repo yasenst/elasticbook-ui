@@ -1,60 +1,27 @@
-
 <div id="wrapper">
 
-    <!-- Header -->
-    <!--<header id="header">
-        <div class="inner">
-
-            &lt;!&ndash; Logo &ndash;&gt;
-            <a [routerLink]="['']" class="logo">
-                <span class="fa fa-book"></span> <span class="title">Learning Materials</span>
-            </a>
-
-            &lt;!&ndash; Nav &ndash;&gt;
-            <nav>
-                <ul>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['']">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/search']">Search</a>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
-    </header>-->
-
-    <!-- Main -->
     <div id="main">
         <div class="inner">
-            <h1>Library</h1>
+            <h1>Search Library</h1>
             <div class="row">
                 <div class="col-md-offset-4 col-md-4">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
                         <table>
                             <tr>
-
                                 <mat-form-field appearance="fill">
-                                    <mat-label>Keyword</mat-label>
+                                    <mat-label>Text to search</mat-label>
                                     <input matInput  formControlName="keyword">
                                 </mat-form-field>
 
                                 <mat-form-field appearance="fill">
-                                    <mat-label>Subject</mat-label>
-                                    <mat-select (selectionChange)="changeSubject($event)">
-                                        <mat-option></mat-option>
-                                        <mat-option value="Computer Science">Computer Science</mat-option>
-                                        <mat-option value="Algorithms">Algorithms</mat-option>
-                                        <mat-option value="Databases">Databases</mat-option>
-                                        <mat-option value="Data Science">Data Science</mat-option>
-                                        <mat-option value="Programming">Programming</mat-option>
-                                        <mat-option value="Signal Processing">Signal Processing</mat-option>
+                                    <mat-label>Type</mat-label>
+                                    <mat-select [(value)]="selectedSearchType">
+                                        <mat-option value="Books">Books</mat-option>
+                                        <mat-option value="Courses">Courses</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
-                                <td><button class="btn btn-primary" type="submit">Search</button></td>
+                                <td><button class="btn" type="submit">Search</button></td>
                             </tr>
 
                         </table>
@@ -62,11 +29,11 @@
                 </div>
             </div>
 
-            <br>
-            <br>
+            <!--<br>
+            <br>-->
 
-            <div class="container-fluid">
-                <h2 class="h2 border-bottom">Search Results</h2>
+            <!--<div class="container-fluid">
+                <h2 class="h2 border-bottom">Book Search Results</h2>
 
                 <section class="tiles">
                     <article *ngFor="let book of searchResults" class="style1">
@@ -82,8 +49,49 @@
                         </a>
                     </article>
                 </section>
+            </div>-->
+
+            <div [hidden]="bookDataSource.data.length == 0" class="container-fluid">
+                <mat-table #bookSort="matSort" [dataSource]="bookDataSource" matSort>
+
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="author">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Author </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.author}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="subject">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Subject </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.subject}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="bookDisplayedColumns"></mat-header-row>
+                    <mat-row (dblclick)="openBookDetails(row.id)" *matRowDef="let row; columns: bookDisplayedColumns;">
+                    </mat-row>
+                </mat-table>
+
+                <mat-paginator #bookPaginator="matPaginator" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
             </div>
 
+            <div [hidden]="courseDataSource.data.length == 0" class="container-fluid">
+                <mat-table #courseSort="matSort" [dataSource]="courseDataSource" matSort>
+
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="courseDisplayedColumns"></mat-header-row>
+                    <mat-row (dblclick)="openCourseDetails(row.id)" *matRowDef="let row; columns: courseDisplayedColumns;">
+                    </mat-row>
+                </mat-table>
+
+                <mat-paginator #coursePaginator="matPaginator" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
         </div>
     </div>
 

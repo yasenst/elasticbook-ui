@@ -37,11 +37,11 @@
 										<span class="image">
 											<img src="../../../assets/blog-4-720x480.jpg" alt="" />
 										</span>
-                        <a >
+                        <a [routerLink]="['/book', bookLikeThis.id]">
                             <h2>{{bookLikeThis.title}}</h2>
 
                             <h4>{{bookLikeThis.author}}</h4>
-                            [routerLink]="['/book', bookLikeThis.id]"                       </a>
+                        </a>
                     </article>
                 </section>
             </div>

@@ -1,39 +1,14 @@
 <div id="wrapper">
 
-    <!-- Header -->
-    <!--<header id="header">
-        <div class="inner">
-
-            &lt;!&ndash; Logo &ndash;&gt;
-            <a [routerLink]="['']" class="logo">
-                <span class="fa fa-book"></span> <span class="title">Learning Materials</span>
-            </a>
-
-            &lt;!&ndash; Nav &ndash;&gt;
-            <nav>
-                <ul>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/search']" >Search</a>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
-    </header>-->
-
-    <!-- Main -->
     <div id="main">
         <div class="inner">
-            <h1>Library</h1>
+            <h1>Learning Materials Portal</h1>
 
             <div class="image main">
                 <img src="../../../assets/banner-image-6-1920x500.jpg" class="img-fluid" alt="" />
             </div>
 
-            <section class="tiles">
+            <!--<section class="tiles">
                 <article *ngFor="let book of sampleBooks" class="style1">
 									<span class="image">
 										<img src="../../../assets/blog-4-720x480.jpg" alt="" />
@@ -46,43 +21,50 @@
                         <p>Subject: {{book.subject}}</p>
                     </a>
                 </article>
-            </section>
+            </section>-->
+
+            <div class="container-fluid">
+                <h2 class="h2 border-bottom">Sample Books</h2>
+
+                <section class="tiles">
+                    <article *ngFor="let book of sampleBooks" class="style1">
+									<span class="image">
+										<img src="../../../assets/blog-4-720x480.jpg" alt="" />
+									</span>
+                        <a [routerLink]="['/book', book.id]">
+                            <h2>{{book.title}}</h2>
+
+                            <h4>{{book.author}}</h4>
+
+                            <h6>Subject: {{book.subject}}</h6>
+                        </a>
+                    </article>
+                </section>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="container-fluid">
+                <h2 class="h2 border-bottom">Sample Courses</h2>
+
+                <section class="tiles">
+                    <article *ngFor="let course of sampleCourses" class="style2">
+									<span class="image">
+										<img src="../../../assets/course-img1.jpg" alt="" />
+									</span>
+                        <a [routerLink]="['/course', course.id]">
+                            <h2>{{course.title}}</h2>
+
+                            <!--<h4></h4>
+
+                            <h6>Subject: {{course.subject}}</h6>-->
+                        </a>
+                    </article>
+                </section>
+            </div>
 
         </div>
     </div>
-
-    <!-- Footer -->
-    <!--<footer id="footer">
-        <div class="inner">
-            <span style="font-size: smaller;text-align: center;">    All Rights Reserved</span>
-        </div>
-    </footer>-->
 
 </div>
-
-
-<!--<section class="bg-light pt-5 pb-5 shadow-sm">
-  <div class="container">
-    <div class="row pt-5">
-      <div class="col-12">
-        <h3 class="text-uppercase border-bottom mb-4">Learning Materials</h3>
-      </div>
-    </div>
-    <div class="row">
-      &lt;!&ndash;ADD CLASSES HERE d-flex align-items-stretch&ndash;&gt;
-      <mat-card *ngFor="let book of books" class="example-card">
-        <mat-card-title-group>
-          <mat-card-title>{{book.title}}</mat-card-title>
-          <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
-          <img mat-card-sm-image src="assets/img.png" >
-        </mat-card-title-group>
-        &lt;!&ndash;<mat-card-content>
-          {{book.description}}
-        </mat-card-content>&ndash;&gt;
-        <mat-card-actions>
-          <a [routerLink]="['/book', book.id]">Details</a>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
-</section>-->

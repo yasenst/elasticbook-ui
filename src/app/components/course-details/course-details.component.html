@@ -1,0 +1,50 @@
+<div id="wrapper">
+
+    <div *ngIf="course" id="main">
+
+        <div class="inner">
+            <h1>{{course.title}}</h1>
+            <div class="col-sm-3">
+                <button mat-button (click)="back()" class="back-button">Back</button>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <img src="../../../assets/course-img1.jpg" class="img-fluid" alt="">
+                    </div>
+
+                    <div class="col-md-7">
+                        <h2>{{course.description}}</h2>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="container-fluid">
+                <h2 class="h2 border-bottom">Recommended books for this course</h2>
+
+                <section class="tiles">
+                    <article *ngFor="let book of recommendedBooks" class="style1">
+										<span class="image">
+											<img src="../../../assets/blog-4-720x480.jpg" alt="" />
+										</span>
+                        <a [routerLink]="['/book', book.id]">
+                            <h2>{{book.title}}</h2>
+
+                            <h4>{{book.author}}</h4>
+                        </a>
+                    </article>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

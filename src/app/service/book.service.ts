@@ -14,27 +14,24 @@ export class BookService {
     constructor(private http: HttpClient) { }
 
     getBookById(bookId: string) {
-    return this.http.get('/server/api/books/' + bookId);
+    return this.http.get('/es-server/books/' + bookId);
     }
 
     getSampleBooks() {
-        return this.http.get('/server/api/books/sample');
+        return this.http.get('/es-server/books/sample');
     }
 
     getBooksBySubject(subject: string) {
-      return this.http.get('/server/api/books/subject/' + subject);
+      return this.http.get('/es-server/books/subject/' + subject);
     }
 
     getSimilarBooks(bookId: string) {
-        return this.http.get('/server/api/books/' + bookId + '/similar');
+        return this.http.get('/es-server/books/' + bookId + '/morelikethis');
     }
 
-    searchBooks(text: string, subject: string) {
-        let url = '/server/api/books/search?text=';
-        if (subject != undefined) {
-            return this.http.get(url + text + '&subject=' + subject);
-        }
-        return this.http.get(url + text);
+    searchBooks(text: string): Observable<any> {
+        let url = '/es-server/books/search?text=' + text;
+        return this.http.get(url);
     }
 
     // SQL

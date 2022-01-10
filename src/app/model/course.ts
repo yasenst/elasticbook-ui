@@ -1,7 +1,6 @@
-export class Book {
+export class Course {
     id: string | undefined;
     title: string | undefined;
     description: string | undefined;
-    author: string | undefined;
-    subject: string | undefined;
+    subject: string | undefined
 }

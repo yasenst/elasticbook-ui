@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from "@angular/material/card";
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import {RouterModule} from "@angular/router";
-import { BookDetailsCategoryComponent } from './components/book-details/book-details-category/book-details-category.component';
 import { SearchComponent } from './components/search/search.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -17,7 +16,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {MatRippleModule} from "@angular/material/core";
 import { HeaderComponent } from './components/header/header.component';
-import {MatToolbar, MatToolbarModule} from "@angular/material/toolbar";
+import {MatToolbarModule} from "@angular/material/toolbar";
 import { FooterComponent } from './components/footer/footer.component';
 import {JwtHttpInterceptorService} from "./service/jwt-http-interceptor.service";
 import { LoginComponent } from './components/login/login.component';
@@ -29,19 +28,20 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { MaterialModule } from './material/material.module';
 import {MatSortModule} from "@angular/material/sort";
+import { CourseDetailsComponent } from './components/course-details/course-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     BookDetailsComponent,
-    BookDetailsCategoryComponent,
     SearchComponent,
     HeaderComponent,
     FooterComponent,
     LoginComponent,
     LogoutComponent,
-    UserBooksComponent
+    UserBooksComponent,
+    CourseDetailsComponent
   ],
   imports: [
     BrowserModule,

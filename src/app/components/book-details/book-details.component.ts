@@ -82,11 +82,8 @@ export class BookDetailsComponent implements OnInit {
 
     private getBooksLikeThis() {
         this.bookService.getSimilarBooks(this.book.id).subscribe({
-            next: (data:any) => {
-                if (this.booksLikeThis.length > 0) {
-                    this.booksLikeThis = [];
-                }
-                data.forEach(searchHit => this.booksLikeThis.push(searchHit.content));
+            next: (booksLikeThis:any) => {
+                this.booksLikeThis = booksLikeThis;
             },
             error: err => console.error(err)
         });
