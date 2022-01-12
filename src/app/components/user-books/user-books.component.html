@@ -31,6 +31,26 @@
 
                 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
             </div>
+
+            <br>
+            <br>
+
+            <div class="container-fluid">
+                <h2 class="h2 border-bottom">Recommended for you based on your books</h2>
+
+                <section class="tiles">
+                    <article *ngFor="let recommendedBook of personallyRecommendedBooks" class="style3">
+									<span class="image">
+										<img src="../../../assets/blog-4-720x480.jpg" alt="" />
+									</span>
+                        <a [routerLink]="['/book', recommendedBook.id]">
+                            <h2>{{recommendedBook.title}}</h2>
+
+                            <h4>{{recommendedBook.author}}</h4>
+                        </a>
+                    </article>
+                </section>
+            </div>
         </div>
     </div>
 </div>

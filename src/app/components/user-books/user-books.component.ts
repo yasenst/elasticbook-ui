@@ -16,6 +16,7 @@ export class UserBooksComponent implements OnInit {
 
     displayedColumns = ['title', 'author', 'subject'];
     dataSource: MatTableDataSource<Book>;
+    personallyRecommendedBooks: Book[] = [];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -32,7 +33,11 @@ export class UserBooksComponent implements OnInit {
                     this.dataSource.paginator = this.paginator;
                     this.dataSource.sort = this.sort;
                 },
-                error: err => console.error(err)
+                error: err => console.error(err),
+                complete: () => {
+                    let bookIdList: string[] = this.dataSource.data.map(book => book.id);
+                    this.getRecommendedBasedOnList(bookIdList);
+                }
             });
         }
     }
@@ -43,5 +48,14 @@ export class UserBooksComponent implements OnInit {
 
     openBookDetails(bookId: string) {
         this.router.navigate(['book', bookId]);
+    }
+
+    private getRecommendedBasedOnList(bookIdList: string[]) {
+        this.bookService.getRecommendedBasedOnList(bookIdList).subscribe({
+            next: (books:any) => {
+                this.personallyRecommendedBooks = books;
+            },
+            error: err => console.error(err)
+        });
     }
 }

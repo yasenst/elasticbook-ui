@@ -16,6 +16,7 @@ export class BookDetailsComponent implements OnInit {
     book: Book;
     booksFromSameSubject: Book[] = [];
     booksLikeThis: Book[] = [];
+    booksOwnersAlsoLike: Book[] = [];
 
     userOwnsThisBook: boolean = false;
 
@@ -46,6 +47,20 @@ export class BookDetailsComponent implements OnInit {
         );
     }
 
+    removeBookFromUser() {
+        this.bookService.removeBookFromUser(this.book.id).subscribe(
+            data => {
+                this.snackBar.open("Book removed from 'My Books'", 'Close', {
+                    duration: 1000
+                });
+                this.userOwnsThisBook = false;
+            },
+            (error) => {
+                console.log(error.message);
+            }
+        );
+    }
+
     isUserLoggedIn() {
         return this.authService.isUserLoggedIn();
     }
@@ -61,9 +76,9 @@ export class BookDetailsComponent implements OnInit {
             },
             error: err => console.error(err),
             complete: () => {
-                this.getBooksLikeThis();
-                this.getBooksFromSameSubject();
                 this.checkIfUserOwnsThisBook();
+                this.getBooksLikeThis();
+                this.getBooksOwnersAlsoLike();
             }
         });
     }
@@ -84,6 +99,15 @@ export class BookDetailsComponent implements OnInit {
         this.bookService.getSimilarBooks(this.book.id).subscribe({
             next: (booksLikeThis:any) => {
                 this.booksLikeThis = booksLikeThis;
+            },
+            error: err => console.error(err)
+        });
+    }
+
+    private getBooksOwnersAlsoLike() {
+        this.bookService.getBooksOwnersAlsoLike(this.book.id).subscribe({
+            next: (booksOwnersAlsoLike:any) => {
+                this.booksOwnersAlsoLike = booksOwnersAlsoLike;
             },
             error: err => console.error(err)
         });

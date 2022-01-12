@@ -18,9 +18,19 @@
                     <div class="col-md-7">
                         <h2>{{book.description}}</h2>
 
-                        <div *ngIf="isUserLoggedIn()" matTooltip="You already own this book" [matTooltipDisabled]="!userOwnsThisBook" class="col-sm-6">
-                            <button mat-button [disabled]="userOwnsThisBook" (click)="addBookToUser()">Add to 'My Books'</button>
+                        <div *ngIf="isUserLoggedIn()" class="col-sm-6">
+                            <div *ngIf="!userOwnsThisBook; else bookNotOwned">
+                                <button mat-button (click)="addBookToUser()">Add to 'My Books'</button>
+                            </div>
+
+                            <ng-template #bookNotOwned>
+                                <button mat-button (click)="removeBookFromUser()">Remove from 'My Books'</button>
+                            </ng-template>
                         </div>
+
+                        <!--<div  matTooltip="You already own this book" [matTooltipDisabled]="!userOwnsThisBook" class="col-sm-6">
+                            <button mat-button [disabled]="userOwnsThisBook" (click)="addBookToUser()">Add to 'My Books'</button>
+                        </div>-->
                     </div>
 
                 </div>
@@ -50,17 +60,17 @@
             <br>
 
             <div class="container-fluid">
-                <h2 class="h2 border-bottom">More from '{{book.subject}}'</h2>
+                <h2 class="h2 border-bottom">Users who have this book also like</h2>
 
                 <section class="tiles">
-                    <article *ngFor="let bookFromSameSubject of booksFromSameSubject" class="style2">
+                    <article *ngFor="let bookOwnersAlsoLike of booksOwnersAlsoLike" class="style2">
 										<span class="image">
 											<img src="../../../assets/blog-4-720x480.jpg" alt="" />
 										</span>
-                        <a [routerLink]="['/book', bookFromSameSubject.id]">
-                            <h2>{{bookFromSameSubject.title}}</h2>
+                        <a [routerLink]="['/book', bookOwnersAlsoLike.id]">
+                            <h2>{{bookOwnersAlsoLike.title}}</h2>
 
-                            <h4>{{bookFromSameSubject.author}}</h4>
+                            <h4>{{bookOwnersAlsoLike.author}}</h4>
 
                         </a>
                     </article>
