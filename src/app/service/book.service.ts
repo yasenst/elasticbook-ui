@@ -15,31 +15,29 @@ export class BookService {
     constructor(private http: HttpClient) { }
 
     getBookById(bookId: string) {
-    return this.http.get('/es-server/books/' + bookId);
+    return this.http.get('/server/books/' + bookId);
     }
 
     getSampleBooks() {
-        return this.http.get('/es-server/books/sample');
+        return this.http.get('/server/books/sample');
     }
 
     getBooksBySubject(subject: string) {
-      return this.http.get('/es-server/books/subject/' + subject);
+      return this.http.get('/server/books/subjects/' + subject);
     }
 
     getSimilarBooks(bookId: string) {
-        return this.http.get('/es-server/books/' + bookId + '/morelikethis');
+        return this.http.get('/server/books/' + bookId + '/morelikethis');
     }
 
     getRecommendedBasedOnList(bookIdList: string[]) {
-        return this.http.post('/es-server/books/recommendedlist', bookIdList, httpOptions);
+        return this.http.post('/server/books/recommended', bookIdList, httpOptions);
     }
 
     searchBooks(text: string): Observable<any> {
-        let url = '/es-server/books/search?text=' + text;
+        let url = '/server/books/search?text=' + text;
         return this.http.get(url);
     }
-
-    // SQL
 
     getBooksForUser():Observable<any> {
         return this.http.get('/server/users/books');
@@ -60,6 +58,6 @@ export class BookService {
     // Mixed Aggregation
 
     getBooksOwnersAlsoLike(bookId: string):Observable<any> {
-        return this.http.post('/server/users/books/owners-like', bookId, httpOptions);
+        return this.http.post('/server/users/books/recommended', bookId, httpOptions);
     }
 }

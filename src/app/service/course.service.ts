@@ -10,19 +10,19 @@ export class CourseService {
     constructor(private http: HttpClient) { }
 
     getCourseById(courseId: string) {
-        return this.http.get('/es-server/courses/' + courseId);
+        return this.http.get('/server/courses/' + courseId);
     }
 
     getSampleCourses() {
-        return this.http.get('/es-server/courses/sample');
+        return this.http.get('/server/courses/sample');
     }
 
     getRecommendedBooks(courseId: string) {
-        return this.http.get('/es-server/courses/' + courseId + '/recommended');
+        return this.http.get('/server/courses/' + courseId + '/recommended');
     }
 
     searchCourses(text: string): Observable<any> {
-        let url = '/es-server/courses/search?text=' + text;
+        let url = '/server/courses/search?text=' + text;
         return this.http.get(url);
     }
 }

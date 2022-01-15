@@ -8,21 +8,6 @@
                 <img src="../../../assets/banner-image-6-1920x500.jpg" class="img-fluid" alt="" />
             </div>
 
-            <!--<section class="tiles">
-                <article *ngFor="let book of sampleBooks" class="style1">
-									<span class="image">
-										<img src="../../../assets/blog-4-720x480.jpg" alt="" />
-									</span>
-                    <a [routerLink]="['/book', book.id]">
-                        <h2>{{book.title}}</h2>
-
-                        <h4>{{book.author}}</h4>
-
-                        <p>Subject: {{book.subject}}</p>
-                    </a>
-                </article>
-            </section>-->
-
             <div class="container-fluid">
                 <h2 class="h2 border-bottom">Sample Books</h2>
 
@@ -34,7 +19,7 @@
                         <a [routerLink]="['/book', book.id]">
                             <h2>{{book.title}}</h2>
 
-                            <h4>{{book.author}}</h4>
+                            <p>{{book.author}}</p>
 
                             <h6>Subject: {{book.subject}}</h6>
                         </a>

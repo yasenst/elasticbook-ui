@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="col-md-7">
-                        <h2>{{book.description}}</h2>
+                        <p class="book-description">{{book.description}}</p>
 
                         <div *ngIf="isUserLoggedIn()" class="col-sm-6">
                             <div *ngIf="!userOwnsThisBook; else bookNotOwned">
@@ -43,7 +43,7 @@
                 <h2 class="h2 border-bottom">More like this</h2>
 
                 <section class="tiles">
-                    <article *ngFor="let bookLikeThis of booksLikeThis" class="style3">
+                    <article *ngFor="let bookLikeThis of booksLikeThis" class="style1">
 										<span class="image">
 											<img src="../../../assets/blog-4-720x480.jpg" alt="" />
 										</span>
@@ -60,7 +60,7 @@
             <br>
 
             <div class="container-fluid">
-                <h2 class="h2 border-bottom">Users who have this book also like</h2>
+                <h2 *ngIf="booksOwnersAlsoLike.length > 0" class="h2 border-bottom">Users who have this book also like</h2>
 
                 <section class="tiles">
                     <article *ngFor="let bookOwnersAlsoLike of booksOwnersAlsoLike" class="style2">

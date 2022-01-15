@@ -7,14 +7,5 @@
     "pathRewrite": {
       "^/server" : "/api"
     }
-  },
-  "/es-server": {
-    "target": "http://localhost:8080",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug",
-    "pathRewrite": {
-      "^/es-server" : "/api/es"
-    }
   }
 }

@@ -2,23 +2,20 @@
     <div id="main">
         <div class="inner">
             <h1>{{getLoggedUsername()}}'s books</h1>
-            <div class="example-container mat-elevation-z8">
+            <div class="example-container mat-elevation-z2">
 
                 <mat-table [dataSource]="dataSource" matSort>
 
-                    <!-- Progress Column -->
                     <ng-container matColumnDef="title">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
                         <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
                     </ng-container>
 
-                    <!-- Name Column -->
                     <ng-container matColumnDef="author">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Author </mat-header-cell>
                         <mat-cell *matCellDef="let row"> {{row.author}} </mat-cell>
                     </ng-container>
 
-                    <!-- Color Column -->
                     <ng-container matColumnDef="subject">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Subject </mat-header-cell>
                         <mat-cell *matCellDef="let row"> {{row.subject}} </mat-cell>
@@ -39,7 +36,7 @@
                 <h2 class="h2 border-bottom">Recommended for you based on your books</h2>
 
                 <section class="tiles">
-                    <article *ngFor="let recommendedBook of personallyRecommendedBooks" class="style3">
+                    <article *ngFor="let recommendedBook of personallyRecommendedBooks" class="style1">
 									<span class="image">
 										<img src="../../../assets/blog-4-720x480.jpg" alt="" />
 									</span>
