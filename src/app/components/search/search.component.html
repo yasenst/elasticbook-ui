@@ -21,9 +21,18 @@
                                     </mat-select>
                                 </mat-form-field>
 
-                                <td><button class="btn" type="submit">Search</button></td>
-                            </tr>
+                                <mat-form-field *ngIf="bookDataSource.data.length > 0 && this.selectedSearchType == 'Books'" appearance="fill">
+                                    <mat-label>Filter by Subject</mat-label>
+                                    <mat-select [(value)]="selectedSubject" (selectionChange)="applySubjectFilter()">
+                                        <mat-option value="All Subjects">All Subjects</mat-option>
+                                        <mat-option  *ngFor="let subject of subjects" [value]="subject" >
+                                            {{subject}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
 
+                                <td><button class="btn btn-primary" type="submit">Search</button></td>
+                            </tr>
                         </table>
                     </form>
                 </div>

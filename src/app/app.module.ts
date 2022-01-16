@@ -29,6 +29,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { MaterialModule } from './material/material.module';
 import {MatSortModule} from "@angular/material/sort";
 import { CourseDetailsComponent } from './components/course-details/course-details.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CourseDetailsComponent } from './components/course-details/course-detai
     LoginComponent,
     LogoutComponent,
     UserBooksComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

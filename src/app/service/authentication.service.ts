@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map} from "rxjs";
+import {map, Observable} from "rxjs";
 import {LoginDto} from "../model/login-dto";
 
 const httpOptions = {
@@ -26,9 +26,17 @@ export class AuthenticationService {
                     sessionStorage.setItem("username", username);
                     let tokenStr = "Bearer " + userData.token;
                     sessionStorage.setItem("token", tokenStr);
+                    sessionStorage.setItem("roles", userData.roles);
                     return userData;
                 })
             );
+    }
+
+    register(username: string, password: string): Observable<any> {
+        return this.httpClient.post("http://localhost:8080/register", {
+            username,
+            password
+        }, {responseType: 'text'});
     }
 
     isUserLoggedIn() {
@@ -37,11 +45,26 @@ export class AuthenticationService {
         return !(user === null);
     }
 
+    hasRoleUser() {
+        let roles = sessionStorage.getItem("roles");
+        return roles.includes('USER');
+    }
+
+    public getUser(): any {
+        const user = sessionStorage.getItem("user");
+        if (user) {
+            return JSON.parse(user);
+        }
+
+        return {};
+    }
+
     getLoggedUsername() {
         return sessionStorage.getItem("username");
     }
 
     logOut() {
-        sessionStorage.removeItem("username");
+        sessionStorage.clear();
+        //sessionStorage.removeItem("username");
     }
 }

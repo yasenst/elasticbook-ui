@@ -13,6 +13,10 @@ export class HeaderComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    hasRoleUser() {
+        return this.loginService.hasRoleUser();
+    }
+
     isUserLoggedIn() {
         return this.loginService.isUserLoggedIn();
     }

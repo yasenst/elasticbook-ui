@@ -16,8 +16,12 @@ import {Router} from "@angular/router";
 })
 export class SearchComponent implements OnInit {
 
+    ALL_SUBJECTS: string = 'All Subjects';
+
     selectedSearchType: string;
-    searchResults: Book[] = [];
+    selectedSubject: string;
+    booksSearchResults: Book[] = [];
+    subjects: String[] = [];
 
     bookDisplayedColumns = ['title', 'author', 'subject'];
     bookDataSource: MatTableDataSource<Book>;
@@ -48,7 +52,7 @@ export class SearchComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
+        this.getSubjects();
     }
 
     onSubmit(): void {
@@ -58,6 +62,7 @@ export class SearchComponent implements OnInit {
             this.bookService.searchBooks(keyword).subscribe({
                 next: (booksSearchResult: any) => {
                     this.courseDataSource.data = [];
+                    this.booksSearchResults = booksSearchResult
                     this.bookDataSource.data = booksSearchResult;
                     this.bookDataSource.paginator = this.bookPaginator;
                     this.bookDataSource.sort = this.bookSort;
@@ -67,6 +72,7 @@ export class SearchComponent implements OnInit {
         } else {
             this.courseService.searchCourses(keyword).subscribe({
                 next: (coursesSearchResult: any) => {
+                    this.booksSearchResults = [];
                     this.bookDataSource.data = [];
                     this.courseDataSource.data = coursesSearchResult;
                     this.courseDataSource.paginator = this.coursePaginator;
@@ -83,6 +89,24 @@ export class SearchComponent implements OnInit {
 
     openCourseDetails(courseId: string) {
         this.router.navigate(['course', courseId]);
+    }
+
+    applySubjectFilter() {
+        if (this.selectedSubject == this.ALL_SUBJECTS) {
+            this.bookDataSource.data = this.booksSearchResults;
+        } else {
+            this.bookDataSource.data = this.booksSearchResults.filter(book => book.subject == this.selectedSubject);
+        }
+    }
+
+    private getSubjects() {
+        return this.bookService.getSubjects().subscribe({
+            next: (subjects: any) => {
+                this.subjects = subjects;
+                this.selectedSubject = this.ALL_SUBJECTS;
+            },
+            error: err => console.error(err)
+        });
     }
 
 }

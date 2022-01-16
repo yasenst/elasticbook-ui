@@ -8,6 +8,7 @@ import {LogoutComponent} from "./components/logout/logout.component";
 import {AuthGuardService} from "./service/auth-guard.service";
 import {UserBooksComponent} from "./components/user-books/user-books.component";
 import {CourseDetailsComponent} from "./components/course-details/course-details.component";
+import {RegisterComponent} from "./components/register/register.component";
 
 const routes: Routes = [
     {
@@ -25,6 +26,10 @@ const routes: Routes = [
     {
         path: 'search',
         component: SearchComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     },
     {
         path: 'login',

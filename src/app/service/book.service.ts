@@ -26,6 +26,10 @@ export class BookService {
       return this.http.get('/server/books/subjects/' + subject);
     }
 
+    getSubjects() {
+        return this.http.get('/server/books/subjects/');
+    }
+
     getSimilarBooks(bookId: string) {
         return this.http.get('/server/books/' + bookId + '/morelikethis');
     }
