@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {CourseDto} from "../model/CourseDto";
+
+const httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +16,14 @@ export class CourseService {
 
     getCourseById(courseId: string) {
         return this.http.get('/server/courses/' + courseId);
+    }
+
+    createCourse(courseDto: CourseDto) {
+        return this.http.post('/server/courses', courseDto, httpOptions);
+    }
+
+    deleteCourse(courseId: string) {
+        return this.http.delete('/server/courses/' + courseId);
     }
 
     getSampleCourses() {

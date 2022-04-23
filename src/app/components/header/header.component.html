@@ -3,10 +3,12 @@
         <span><a mat-button [routerLink]="['']" style="font-size: larger;">Learning Materials</a></span>
         <a mat-button [routerLink]="['']">Home</a>
         <a mat-button [routerLink]="['/search']" >Search</a>
+        <a mat-button *ngIf="hasRoleUser()" routerLink="/user-books">My Books</a>
+        <a mat-button *ngIf="hasRoleAdmin()" routerLink="admin/add-book">Add Book</a>
+        <a mat-button *ngIf="hasRoleAdmin()" routerLink="admin/add-course">Add Course</a>
+        <span class="fill-space"></span>
         <a mat-button *ngIf="!isUserLoggedIn()" routerLink="/login">Login</a>
         <a mat-button *ngIf="!isUserLoggedIn()" routerLink="/register">Register</a>
-        <a mat-button *ngIf="isUserLoggedIn()" routerLink="/user-books">My Books</a>
-        <span class="fill-space"></span>
         <a mat-button *ngIf="isUserLoggedIn()" routerLink="/logout">Logout</a>
     </mat-toolbar-row>
 </mat-toolbar>

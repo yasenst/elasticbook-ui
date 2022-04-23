@@ -46,8 +46,19 @@ export class AuthenticationService {
     }
 
     hasRoleUser() {
+        if (!this.isUserLoggedIn()) {
+            return false;
+        }
         let roles = sessionStorage.getItem("roles");
         return roles.includes('USER');
+    }
+
+    hasRoleAdmin() {
+        if (!this.isUserLoggedIn()) {
+            return false;
+        }
+        let roles = sessionStorage.getItem("roles");
+        return roles.includes('ADMIN');
     }
 
     public getUser(): any {

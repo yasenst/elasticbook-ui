@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Book} from "../model/book";
+import {BookDto} from "../model/BookDto";
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -15,7 +15,15 @@ export class BookService {
     constructor(private http: HttpClient) { }
 
     getBookById(bookId: string) {
-    return this.http.get('/server/books/' + bookId);
+        return this.http.get('/server/books/' + bookId);
+    }
+
+    createBook(bookDto: BookDto) {
+        return this.http.post('/server/books', bookDto, httpOptions);
+    }
+
+    deleteBook(bookId: string) {
+        return this.http.delete('/server/books/' + bookId);
     }
 
     getSampleBooks() {
@@ -31,7 +39,7 @@ export class BookService {
     }
 
     getSimilarBooks(bookId: string) {
-        return this.http.get('/server/books/' + bookId + '/morelikethis');
+        return this.http.get('/server/books/' + bookId + '/more');
     }
 
     getRecommendedBasedOnList(bookIdList: string[]) {
@@ -48,15 +56,15 @@ export class BookService {
     }
 
     addBookToUser(bookId: string):Observable<any> {
-        return this.http.post('/server/users/books/add', bookId, httpOptions);
+        return this.http.post('/server/users/books', bookId, httpOptions);
     }
 
     removeBookFromUser(bookId: string):Observable<any> {
-        return this.http.post('/server/users/books/remove', bookId, httpOptions);
+        return this.http.delete('/server/users/books/' + bookId);
     }
 
     userOwnsBook(bookId: string):Observable<any> {
-        return this.http.post('/server/users/books/check-ownership', bookId, httpOptions);
+        return this.http.post('/server/users/books/ownership', bookId, httpOptions);
     }
 
     // Mixed Aggregation

@@ -17,6 +17,10 @@ export class HeaderComponent implements OnInit {
         return this.loginService.hasRoleUser();
     }
 
+    hasRoleAdmin() {
+        return this.loginService.hasRoleAdmin();
+    }
+
     isUserLoggedIn() {
         return this.loginService.isUserLoggedIn();
     }

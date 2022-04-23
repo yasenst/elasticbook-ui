@@ -18,7 +18,7 @@
                     <div class="col-md-7">
                         <p class="book-description">{{book.description}}</p>
 
-                        <div *ngIf="isUserLoggedIn()" class="col-sm-6">
+                        <div *ngIf="hasRoleUser()" class="col-sm-6">
                             <div *ngIf="!userOwnsThisBook; else bookNotOwned">
                                 <button mat-button (click)="addBookToUser()">Add to 'My Books'</button>
                             </div>
@@ -26,6 +26,10 @@
                             <ng-template #bookNotOwned>
                                 <button mat-button (click)="removeBookFromUser()">Remove from 'My Books'</button>
                             </ng-template>
+                        </div>
+
+                        <div *ngIf="hasRoleAdmin()">
+                            <button mat-button (click)="deleteBook()" class="btn btn-danger" >Delete Book</button>
                         </div>
 
                         <!--<div  matTooltip="You already own this book" [matTooltipDisabled]="!userOwnsThisBook" class="col-sm-6">

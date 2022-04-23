@@ -30,6 +30,8 @@ import { MaterialModule } from './material/material.module';
 import {MatSortModule} from "@angular/material/sort";
 import { CourseDetailsComponent } from './components/course-details/course-details.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AddBookComponent } from './components/add-book/add-book.component';
+import { AddCourseComponent } from './components/add-course/add-course.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { RegisterComponent } from './components/register/register.component';
     LogoutComponent,
     UserBooksComponent,
     CourseDetailsComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddBookComponent,
+    AddCourseComponent
   ],
   imports: [
     BrowserModule,

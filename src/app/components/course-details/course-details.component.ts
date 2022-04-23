@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {Course} from "../../model/course";
 import {CourseService} from "../../service/course.service";
 import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Book} from "../../model/book";
+import {AuthenticationService} from "../../service/authentication.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-course-details',
@@ -18,7 +20,10 @@ export class CourseDetailsComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private courseService: CourseService,
-                private location: Location) { }
+                private location: Location,
+                private router: Router,
+                private snackBar: MatSnackBar,
+                private authService: AuthenticationService) { }
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
@@ -28,6 +33,28 @@ export class CourseDetailsComponent implements OnInit {
 
     back(): void {
         this.location.back();
+    }
+
+    hasRoleAdmin() {
+        return this.authService.hasRoleAdmin();
+    }
+
+    deleteCourse() {
+        this.courseService.deleteCourse(this.course.id).subscribe(
+            data => {
+                this.snackBar.open("Course deleted.", 'Close', {
+                    duration: 1000
+                });
+                this.router.navigate([''])
+            },
+            (error) => {
+                this.snackBar.open("Couldn't delete course.", 'Close', {
+                    duration: 1000
+                });
+                console.log(error.message);
+                this.router.navigate(['']);
+            }
+        );
     }
 
     private getCourseDetails(courseId: string) {

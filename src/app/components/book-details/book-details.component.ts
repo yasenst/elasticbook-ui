@@ -1,6 +1,6 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Book} from "../../model/book";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {BookService} from "../../service/book.service";
 import {AuthenticationService} from "../../service/authentication.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -24,6 +24,7 @@ export class BookDetailsComponent implements OnInit {
                 private bookService: BookService,
                 private snackBar: MatSnackBar,
                 private location: Location,
+                private router: Router,
                 private authService: AuthenticationService) {
     }
 
@@ -59,6 +60,32 @@ export class BookDetailsComponent implements OnInit {
                 console.log(error.message);
             }
         );
+    }
+
+    deleteBook() {
+        this.bookService.deleteBook(this.book.id).subscribe(
+            data => {
+                this.snackBar.open("Book deleted.", 'Close', {
+                    duration: 1000
+                });
+                this.router.navigate([''])
+            },
+            (error) => {
+                this.snackBar.open("Couldn't delete book.", 'Close', {
+                    duration: 1000
+                });
+                console.log(error.message);
+                this.router.navigate(['']);
+            }
+        );
+    }
+
+    hasRoleAdmin() {
+        return this.authService.hasRoleAdmin();
+    }
+
+    hasRoleUser() {
+        return this.authService.hasRoleUser();
     }
 
     isUserLoggedIn() {
