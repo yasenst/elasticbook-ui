@@ -1,7 +1,7 @@
 <div id="wrapper">
     <div id="main">
         <div class="inner">
-            <h1>{{getLoggedUsername()}}'s books</h1>
+            <h1>{{getUserFullName()}}'s books</h1>
             <div class="example-container mat-elevation-z2">
 
                 <mat-table [dataSource]="dataSource" matSort>
@@ -22,7 +22,7 @@
                     </ng-container>
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row (dblclick)="openBookDetails(row.id)" *matRowDef="let row; columns: displayedColumns;">
+                    <mat-row (dblclick)="openBookDetails(row.esBookId)" *matRowDef="let row; columns: displayedColumns;">
                     </mat-row>
                 </mat-table>
 

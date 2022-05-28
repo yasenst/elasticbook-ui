@@ -1,11 +1,11 @@
 :host {
     display: flex;
     justify-content: center;
-    margin: 100px 0px;
+    margin: 50px 0px;
 }
 
 .card {
-    min-width: 300px;
+    width: 40%;
 }
 
 .mat-form-field {
@@ -36,6 +36,3 @@ mat-card-content {
     padding-bottom: 10px;
 }
 
-.btn-secondary {
-    margin-left: 5px;
-}

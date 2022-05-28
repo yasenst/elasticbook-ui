@@ -27,7 +27,8 @@ export class UserBooksComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.authService.isUserLoggedIn()) {
-            this.bookService.getBooksForUser().subscribe({
+            let userId = sessionStorage.getItem("userId");
+            this.bookService.getBooksForUser(parseInt(userId)).subscribe({
                 next: (books) => {
                     this.dataSource = new MatTableDataSource(books);
                     this.dataSource.paginator = this.paginator;
@@ -35,15 +36,15 @@ export class UserBooksComponent implements OnInit {
                 },
                 error: err => console.error(err),
                 complete: () => {
-                    let bookIdList: string[] = this.dataSource.data.map(book => book.id);
+                    let bookIdList: string[] = this.dataSource.data.map(book => book.esBookId);
                     this.getRecommendedBasedOnList(bookIdList);
                 }
             });
         }
     }
 
-    getLoggedUsername() {
-        return this.authService.getLoggedUsername();
+    getUserFullName() {
+        return this.authService.getUserFullName();
     }
 
     openBookDetails(bookId: string) {

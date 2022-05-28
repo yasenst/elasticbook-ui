@@ -12,6 +12,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import {AddBookComponent} from "./components/add-book/add-book.component";
 import {AuthGuardAdminService} from "./service/auth-guard-admin.service";
 import {AddCourseComponent} from "./components/add-course/add-course.component";
+import {EditBookComponent} from "./components/edit-book/edit-book.component";
 
 const routes: Routes = [
     {
@@ -51,6 +52,11 @@ const routes: Routes = [
     {
         path: 'admin/add-book',
         component: AddBookComponent,
+        canActivate:[AuthGuardAdminService]
+    },
+    {
+        path: 'admin/edit-book/:bookId',
+        component: EditBookComponent,
         canActivate:[AuthGuardAdminService]
     },
     {

@@ -20,15 +20,16 @@
 
                         <div *ngIf="hasRoleUser()" class="col-sm-6">
                             <div *ngIf="!userOwnsThisBook; else bookNotOwned">
-                                <button mat-button (click)="addBookToUser()">Add to 'My Books'</button>
+                                <button mat-button class="btn btn-success" (click)="addBookToUser()">Add to 'My Books'</button>
                             </div>
 
                             <ng-template #bookNotOwned>
-                                <button mat-button (click)="removeBookFromUser()">Remove from 'My Books'</button>
+                                <button mat-button class="btn btn-secondary" (click)="removeBookFromUser()">Remove from 'My Books'</button>
                             </ng-template>
                         </div>
 
                         <div *ngIf="hasRoleAdmin()">
+                            <a [routerLink]="['/admin/edit-book', book.id]" class="btn btn-warning" >Edit Book</a>
                             <button mat-button (click)="deleteBook()" class="btn btn-danger" >Delete Book</button>
                         </div>
 
@@ -67,7 +68,7 @@
                 <h2 *ngIf="booksOwnersAlsoLike.length > 0" class="h2 border-bottom">Users who have this book also like</h2>
 
                 <section class="tiles">
-                    <article *ngFor="let bookOwnersAlsoLike of booksOwnersAlsoLike" class="style2">
+                    <article *ngFor="let bookOwnersAlsoLike of booksOwnersAlsoLike" class="style3">
 										<span class="image">
 											<img src="../../../assets/blog-4-720x480.jpg" alt="" />
 										</span>

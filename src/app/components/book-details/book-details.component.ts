@@ -35,7 +35,8 @@ export class BookDetailsComponent implements OnInit {
     }
 
     addBookToUser() {
-        this.bookService.addBookToUser(this.book.id).subscribe(
+        let userId = sessionStorage.getItem("userId");
+        this.bookService.addBookToUser(parseInt(userId), this.book.id).subscribe(
             data => {
                 this.snackBar.open("Book added to 'My Books'", 'Close', {
                     duration: 1000
@@ -49,7 +50,8 @@ export class BookDetailsComponent implements OnInit {
     }
 
     removeBookFromUser() {
-        this.bookService.removeBookFromUser(this.book.id).subscribe(
+        let userId = sessionStorage.getItem("userId");
+        this.bookService.removeBookFromUser(parseInt(userId), this.book.id).subscribe(
             data => {
                 this.snackBar.open("Book removed from 'My Books'", 'Close', {
                     duration: 1000
@@ -144,7 +146,8 @@ export class BookDetailsComponent implements OnInit {
         if (!this.isUserLoggedIn()) {
             this.userOwnsThisBook = false;
         } else {
-            this.bookService.userOwnsBook(this.book.id).subscribe({
+            let userId = sessionStorage.getItem("userId");
+            this.bookService.userOwnsBook(parseInt(userId), this.book.id).subscribe({
                 next: (result:boolean) => {
                     this.userOwnsThisBook = result;
                 },

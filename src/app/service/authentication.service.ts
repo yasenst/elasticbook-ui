@@ -24,6 +24,8 @@ export class AuthenticationService {
             .pipe(
                 map(userData => {
                     sessionStorage.setItem("username", username);
+                    sessionStorage.setItem("fullName", userData.fullName);
+                    sessionStorage.setItem("userId", userData.id);
                     let tokenStr = "Bearer " + userData.token;
                     sessionStorage.setItem("token", tokenStr);
                     sessionStorage.setItem("roles", userData.roles);
@@ -32,9 +34,11 @@ export class AuthenticationService {
             );
     }
 
-    register(username: string, password: string): Observable<any> {
+    register(username: string, firstName: string, lastName: string, password: string): Observable<any> {
         return this.httpClient.post("http://localhost:8080/register", {
             username,
+            firstName,
+            lastName,
             password
         }, {responseType: 'text'});
     }
@@ -72,6 +76,10 @@ export class AuthenticationService {
 
     getLoggedUsername() {
         return sessionStorage.getItem("username");
+    }
+
+    getUserFullName() {
+        return sessionStorage.getItem("fullName");
     }
 
     logOut() {

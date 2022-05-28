@@ -1,0 +1,42 @@
+<div class="card">
+    <h4 class="card-header">Edit Book</h4>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill">
+                <mat-label for="title">Title</mat-label>
+                <input matInput type="text" formControlName="title" name="title" autocomplete=false required />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label for="description">Description</mat-label>
+                <textarea matInput  rows="8" formControlName="description" required></textarea>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label for="author">Author</mat-label>
+                <input matInput type="text" formControlName="author" name="author" autocomplete=false required />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Subject</mat-label>
+                <mat-select [(value)]="selectedSubject" required>
+                    <mat-option  *ngFor="let subject of subjects" [value]="subject" >
+                        {{subject}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <p *ngIf="error" class="error">
+                {{ error }}
+            </p>
+
+            <button class="btn btn-primary">
+                Submit
+            </button>
+
+        </form>
+        <!--<mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>-->
+    </div>
+
+</div>
+

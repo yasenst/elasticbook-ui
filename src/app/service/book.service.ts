@@ -22,6 +22,10 @@ export class BookService {
         return this.http.post('/server/books', bookDto, httpOptions);
     }
 
+    updateBook(bookId: string, bookDto: BookDto) {
+        return this.http.put('/server/books/' + bookId, bookDto, httpOptions);
+    }
+
     deleteBook(bookId: string) {
         return this.http.delete('/server/books/' + bookId);
     }
@@ -39,7 +43,11 @@ export class BookService {
     }
 
     getSimilarBooks(bookId: string) {
-        return this.http.get('/server/books/' + bookId + '/more');
+        return this.http.get('/server/books/' + bookId + '/similar');
+    }
+
+    getBooksOwnersAlsoLike(bookId: string):Observable<any> {
+        return this.http.get('/server/books/' + bookId + '/aggregated');
     }
 
     getRecommendedBasedOnList(bookIdList: string[]) {
@@ -47,29 +55,25 @@ export class BookService {
     }
 
     searchBooks(text: string): Observable<any> {
+        text = encodeURIComponent(text);
         let url = '/server/books/search?text=' + text;
         return this.http.get(url);
     }
 
-    getBooksForUser():Observable<any> {
-        return this.http.get('/server/users/books');
+    getBooksForUser(userId: number):Observable<any> {
+        return this.http.get('/server/users/' + userId + '/books');
     }
 
-    addBookToUser(bookId: string):Observable<any> {
-        return this.http.post('/server/users/books', bookId, httpOptions);
+    addBookToUser(userId: number, bookId: string):Observable<any> {
+        return this.http.post('/server/users/' + userId + '/books/' + bookId, httpOptions);
     }
 
-    removeBookFromUser(bookId: string):Observable<any> {
-        return this.http.delete('/server/users/books/' + bookId);
+    removeBookFromUser(userId: number, bookId: string):Observable<any> {
+        return this.http.delete('/server/users/' + userId + '/books/' + bookId);
     }
 
-    userOwnsBook(bookId: string):Observable<any> {
-        return this.http.post('/server/users/books/ownership', bookId, httpOptions);
+    userOwnsBook(userId: number, bookId: string):Observable<any> {
+        return this.http.get('/server/users/' + userId + '/books/' + bookId + '/ownership');
     }
 
-    // Mixed Aggregation
-
-    getBooksOwnersAlsoLike(bookId: string):Observable<any> {
-        return this.http.post('/server/users/books/recommended', bookId, httpOptions);
-    }
 }

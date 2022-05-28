@@ -32,6 +32,7 @@ import { CourseDetailsComponent } from './components/course-details/course-detai
 import { RegisterComponent } from './components/register/register.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
 import { AddCourseComponent } from './components/add-course/add-course.component';
+import { EditBookComponent } from './components/edit-book/edit-book.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AddCourseComponent } from './components/add-course/add-course.component
     CourseDetailsComponent,
     RegisterComponent,
     AddBookComponent,
-    AddCourseComponent
+    AddCourseComponent,
+    EditBookComponent
   ],
   imports: [
     BrowserModule,
